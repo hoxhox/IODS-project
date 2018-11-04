@@ -1,6 +1,5 @@
+#output: github_document
 
-# Hello world.  I'm learning to code and knit.
+#About the course IODS
 
-
-
-https://github.com/hoxhox/IODS-project/
+#https://hoxhox.github.io/IODS-project/#about-the-project

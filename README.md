@@ -1,6 +1,5 @@
-
 #output: github_document
 
-#Githubbing is starting to be a bit confusing already.
+#About the course IODS
 
-https://hoxhox.github.io/IODS-project/
+#https://hoxhox.github.io/IODS-project/#about-the-project
