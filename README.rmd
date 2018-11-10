@@ -1,5 +1,13 @@
 #output: github_document
 
 #About the course IODS
-
 #https://hoxhox.github.io/IODS-project/#about-the-project
+
+
+
+#Week 2 submission
+
+The data "Learning 2014" contains data collected from students with questionnaires, their gender, age, attitude towards the subject and exam points. The students, who haven't attended the exam, are excluded. Questions are divided by themes, and then a mean is calculated form each group. This way each student is given points to reflect the patients study habits in deep learning, strategic learning and stuctured learning.
+
+A scatter plot is created to show the relationship between attitude, questionnaire answers and exam points. The attitude clearly correlates to exam points (p<0.05). The andwers in the questionnaire don't have a correlation to exam points.
+
