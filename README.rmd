@@ -12,4 +12,5 @@ The data "Learning 2014" contains data collected from students with questionnair
 A scatter plot is created to show the relationship between attitude, questionnaire answers and exam points. The attitude clearly correlates to exam points (p<0.05). The answers in the questionnaire don't have a correlation to exam points (p=0.46).
 
 
-Diagnostic plots are created to assess the validity of the regression model in the data set. Residuals are plotted against the explanatory value. Here we see, that the residuals are scattered along a horizontal line, which implies, that the variance doesn't change with the explanatory variable. Thus the model seems appropriate.
+Diagnostic plots are created to assess the validity of the regression model in the data set. Residuals are plotted against the explanatory value. Here we see, that the residuals are scattered along a horizontal line, which implies, that the variance doesn't change with the explanatory variable. Thus the model seems appropriate. Also, the points in the normal Q-Q plot lie in y=x line, which shows us, that the 
+distributions are linearly related. Cook's distance shows us, that there are no values with a high leverage. 
