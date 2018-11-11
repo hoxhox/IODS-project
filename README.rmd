@@ -13,4 +13,4 @@ A scatter plot is created to show the relationship between attitude, questionnai
 
 
 Diagnostic plots are created to assess the validity of the regression model in the data set. Residuals are plotted against the explanatory value. Here we see, that the residuals are scattered along a horizontal line, which implies, that the variance doesn't change with the explanatory variable. Thus the model seems appropriate. Also, the points in the normal Q-Q plot lie in y=x line, which shows us, that the 
-distributions are linearly related. Cook's distance shows us, that there are no values with a high leverage. 
+distributions are linearly related. Cook's distance shows us, that there are no values with a high leverage, that is no significant outliers, that would distort the regression analysis result.
