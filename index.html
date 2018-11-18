@@ -149,6 +149,7 @@ $(document).ready(function () {
 <li><a href="#about-the-course-iods">About the course IODS</a></li>
 <li><a href="#httpshoxhox.github.ioiods-projectabout-the-project"><a href="https://hoxhox.github.io/IODS-project/#about-the-project" class="uri">https://hoxhox.github.io/IODS-project/#about-the-project</a></a></li>
 <li><a href="#week-2-submission">Week 2 submission</a></li>
+<li><a href="#week-3-submission">Week 3 submission</a></li>
 </ul>
 </div>
 
@@ -176,6 +177,16 @@ $(document).ready(function () {
 <p>A scatter plot is created to show the relationship between attitude, questionnaire answers and exam points. The attitude clearly correlates to exam points (p&lt;0.05). The answers in the questionnaire don’t have a correlation to exam points (p=0.46).</p>
 <p>Diagnostic plots are created to assess the validity of the regression model in the data set. Residuals are plotted against the explanatory value. Here we see, that the residuals are scattered along a horizontal line, which implies, that the variance doesn’t change with the explanatory variable. Thus the model seems appropriate. Also, the points in the normal Q-Q plot lie in y=x line, which shows us, that the distributions are linearly related. Cook’s distance shows us, that there are no values with a high leverage, that is no significant outliers, that would distort the regression analysis result.</p>
 <hr />
+</div>
+<div id="week-3-submission" class="section level1">
+<h1>Week 3 submission</h1>
+<p>Student questionnaires math&lt;-read.table(C:-Mari-project-mat.csv)</p>
+<p>The data contains information of portuguese students. Their demographic and socioeconomic situation is recorded. Also the use of alcohol and data collected from questionnaires is recorded. The information is combined from sudents, who have conducted the questionnary in theri portuguese and math class.</p>
+<p>The data is used to explore the following hypotheses:</p>
+<p>H1 Students who have high alcohol consumption, have more absences H2 alchohol consumption is higher among older students H3 alchohol consumption decreases as studytime increases H4 alchohol comsumption is highgest among the students, who have most school absence</p>
+<p>H1: a boxplot showing the connection between alcohol consumption and absences is drawn and a logistic model is conducted. Students with high alcohol use have more absences (p&lt;0.05).</p>
+<p>H2: a boxplot and linear logistic model shows, that age and sex effect the odds of high alcohol consumption (p&lt;0.05)</p>
+<p>H3: Alcohol comsumption isn’t higher among students, who study less. Among female, ths study time is even shorter among students, who consume less alcohol.</p>
 </div>
 
 

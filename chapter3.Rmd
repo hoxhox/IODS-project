@@ -9,22 +9,22 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+#Week 3 submission
+Student questionnaires
+math<-read.table(C:\Users\Anna-Mari\Desktop\IODS-project\Data\student-mat.csv)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+The data contains information of portuguese students. Their demographic and socioeconomic situation is recorded. Also the use of alcohol and data collected from questionnaires is recorded. The information is combined from sudents, who have conducted the questionnary in theri portuguese and math class.
 
-```{r cars}
-summary(cars)
-```
+The data is used to explore the following hypotheses:
 
-## Including Plots
+H1 Students who have high alcohol consumption, have more absences
+H2 alchohol consumption is higher among older students
+H3 alchohol consumption decreases as studytime increases
+H4 alchohol comsumption is highgest among the students, who have most school absence
 
-You can also embed plots, for example:
+H1: a boxplot showing the connection between alcohol consumption and absences is drawn and a logistic model is conducted. Students with high alcohol use have more absences (p<0.05). 
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+H2: a boxplot and linear logistic model shows, that age and sex effect the odds of high alcohol consumption (p<0.05)
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+H3: Alcohol comsumption isn't higher among students, who study less. Among female, ths study time is even shorter among students, who consume less alcohol.
