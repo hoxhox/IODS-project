@@ -150,6 +150,47 @@ $(document).ready(function () {
 <li><a href="#httpshoxhox.github.ioiods-projectabout-the-project"><a href="https://hoxhox.github.io/IODS-project/#about-the-project" class="uri">https://hoxhox.github.io/IODS-project/#about-the-project</a></a></li>
 <li><a href="#week-2-submission">Week 2 submission</a></li>
 <li><a href="#week-3-submission">Week 3 submission</a></li>
+<li><a href="#chapter-4-clustering-and-classification">24.11 Chapter 4 Clustering and classification</a></li>
+<li><a href="#center-and-standardize-variables">center and standardize variables</a></li>
+<li><a href="#summaries-of-the-scaled-variables">summaries of the scaled variables</a></li>
+<li><a href="#class-of-the-boston_scaled-object">class of the boston_scaled object</a></li>
+<li><a href="#change-the-object-to-data-frame">change the object to data frame</a></li>
+<li><a href="#summary-of-the-scaled-crime-rate">summary of the scaled crime rate</a></li>
+<li><a href="#create-a-quantile-vector-of-crim-and-print-it">create a quantile vector of crim and print it</a></li>
+<li><a href="#create-a-categorical-variable-crime">create a categorical variable ‘crime’</a></li>
+<li><a href="#look-at-the-table-of-the-new-factor-crime">look at the table of the new factor crime</a></li>
+<li><a href="#remove-original-crim-from-the-dataset">remove original crim from the dataset</a></li>
+<li><a href="#add-the-new-categorical-value-to-scaled-data">add the new categorical value to scaled data</a></li>
+<li><a href="#creating-a-test-and-train-datasets">Creating a test and train datasets</a></li>
+<li><a href="#number-of-rows-in-the-boston-dataset">number of rows in the Boston dataset</a></li>
+<li><a href="#choose-randomly-80-of-the-rows">choose randomly 80% of the rows</a></li>
+<li><a href="#create-train-set">create train set</a></li>
+<li><a href="#create-test-set">create test set</a></li>
+<li><a href="#save-the-correct-classes-from-test-data">save the correct classes from test data</a></li>
+<li><a href="#remove-the-crime-variable-from-test-data">remove the crime variable from test data</a></li>
+<li><a href="#mass-and-train-are-available">MASS and train are available</a></li>
+<li><a href="#linear-discriminant-analysis">linear discriminant analysis</a></li>
+<li><a href="#print-the-lda.fit-object">print the lda.fit object</a></li>
+<li><a href="#the-function-for-lda-biplot-arrows">the function for lda biplot arrows</a></li>
+<li><a href="#target-classes-as-numeric">target classes as numeric</a></li>
+<li><a href="#plot-the-lda-results">plot the lda results</a></li>
+<li><a href="#predictin-classes-with-the-test-data">Predictin classes with the test data</a></li>
+<li><a href="#predict-classes-with-test-data">predict classes with test data</a></li>
+<li><a href="#cross-tabulate-the-results">cross tabulate the results</a></li>
+<li><a href="#euclidean-distance-matrix">euclidean distance matrix</a></li>
+<li><a href="#look-at-the-summary-of-the-distances">look at the summary of the distances</a></li>
+<li><a href="#manhattan-distance-matrix">manhattan distance matrix</a></li>
+<li><a href="#look-at-the-summary-of-the-distances-1">look at the summary of the distances</a></li>
+<li><a href="#kmeans-on-boston-dataset">Kmeans on Boston dataset</a></li>
+<li><a href="#k-means-clustering">k-means clustering</a></li>
+<li><a href="#plot-the-boston-dataset-with-clusters">plot the Boston dataset with clusters</a></li>
+<li><a href="#boston-dataset-is-available">Boston dataset is available</a></li>
+<li><a href="#determine-the-number-of-clusters">determine the number of clusters</a></li>
+<li><a href="#calculate-the-total-within-sum-of-squares">calculate the total within sum of squares</a></li>
+<li><a href="#visualize-the-results">visualize the results</a></li>
+<li><a href="#k-means-clustering-1">k-means clustering</a></li>
+<li><a href="#plot-the-boston-dataset-with-clusters-1">plot the Boston dataset with clusters</a></li>
+<li><a href="#extra">Extra</a></li>
 </ul>
 </div>
 
@@ -187,6 +228,184 @@ $(document).ready(function () {
 <p>H1: a boxplot showing the connection between alcohol consumption and absences is drawn and a logistic model is conducted. Students with high alcohol use have more absences (p&lt;0.05).</p>
 <p>H2: a boxplot and linear logistic model shows, that age and sex effect the odds of high alcohol consumption (p&lt;0.05)</p>
 <p>H3: Alcohol comsumption isn’t higher among students, who study less. Among female, ths study time is even shorter among students, who consume less alcohol.</p>
+<hr />
+</div>
+<div id="chapter-4-clustering-and-classification" class="section level1">
+<h1>24.11 Chapter 4 Clustering and classification</h1>
+<p>install.packages(“MASS”) library(MASS) library(qqplot)</p>
+<p>The Boston dataset contains information about the housing in Boston Mass. The dataset contains 506 observations(rows) of 14 variables(columns). The recorded variables contain the following: crim per capita crime rate by town. zn proportion of residential land zoned for lots over 25,000 sq.ft. indus proportion of non-retail business acres per town. chas Charles River dummy variable (= 1 if tract bounds river; 0 otherwise). nox nitrogen oxides concentration (parts per 10 million). rm average number of rooms per dwelling. age proportion of owner-occupied units built prior to 1940. dis weighted mean of distances to five Boston employment centres. rad index of accessibility to radial highways. tax full-value property-tax rate per $10,000. ptratio pupil-teacher ratio by town. black 1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town. lstat lower status of the population (percent). medv median value of owner-occupied homes in $1000s.</p>
+<p>str(Boston) dim(Boston) pairs(Boston) summary(Boston)</p>
+</div>
+<div id="center-and-standardize-variables" class="section level1">
+<h1>center and standardize variables</h1>
+<p>boston_scaled &lt;- scale(Boston)</p>
+</div>
+<div id="summaries-of-the-scaled-variables" class="section level1">
+<h1>summaries of the scaled variables</h1>
+<p>summary(boston_scaled) The mean of each variable is now 0.</p>
+</div>
+<div id="class-of-the-boston_scaled-object" class="section level1">
+<h1>class of the boston_scaled object</h1>
+<p>class(boston_scaled)</p>
+</div>
+<div id="change-the-object-to-data-frame" class="section level1">
+<h1>change the object to data frame</h1>
+<p>boston_scaled &lt;- as.data.frame(boston_scaled)</p>
+</div>
+<div id="summary-of-the-scaled-crime-rate" class="section level1">
+<h1>summary of the scaled crime rate</h1>
+<p>summary(boston_scaled$crim)</p>
+</div>
+<div id="create-a-quantile-vector-of-crim-and-print-it" class="section level1">
+<h1>create a quantile vector of crim and print it</h1>
+<p>bins &lt;- quantile(boston_scaled$crim) bins</p>
+</div>
+<div id="create-a-categorical-variable-crime" class="section level1">
+<h1>create a categorical variable ‘crime’</h1>
+<p>crime &lt;- cut(boston_scaled$crim, breaks = bins, include.lowest = TRUE, labels = c(“low”, “med_low”, “med_high”, “high”))</p>
+</div>
+<div id="look-at-the-table-of-the-new-factor-crime" class="section level1">
+<h1>look at the table of the new factor crime</h1>
+<p>table(crime)</p>
+</div>
+<div id="remove-original-crim-from-the-dataset" class="section level1">
+<h1>remove original crim from the dataset</h1>
+<p>boston_scaled &lt;- dplyr::select(boston_scaled, -crim)</p>
+</div>
+<div id="add-the-new-categorical-value-to-scaled-data" class="section level1">
+<h1>add the new categorical value to scaled data</h1>
+<p>boston_scaled &lt;- data.frame(boston_scaled, crime)</p>
+<div id="section" class="section level37">
+<p></p>
+</div>
+</div>
+<div id="creating-a-test-and-train-datasets" class="section level1">
+<h1>Creating a test and train datasets</h1>
+</div>
+<div id="number-of-rows-in-the-boston-dataset" class="section level1">
+<h1>number of rows in the Boston dataset</h1>
+<p>n &lt;- nrow(boston_scaled)</p>
+</div>
+<div id="choose-randomly-80-of-the-rows" class="section level1">
+<h1>choose randomly 80% of the rows</h1>
+<p>ind &lt;- sample(n, size = n * 0.8)</p>
+</div>
+<div id="create-train-set" class="section level1">
+<h1>create train set</h1>
+<p>train &lt;- boston_scaled[ind,]</p>
+</div>
+<div id="create-test-set" class="section level1">
+<h1>create test set</h1>
+<p>test &lt;- boston_scaled[-ind,]</p>
+</div>
+<div id="save-the-correct-classes-from-test-data" class="section level1">
+<h1>save the correct classes from test data</h1>
+<p>correct_classes &lt;- test$crime</p>
+</div>
+<div id="remove-the-crime-variable-from-test-data" class="section level1">
+<h1>remove the crime variable from test data</h1>
+<p>test &lt;- dplyr::select(test, -crime) test$crime</p>
+</div>
+<div id="mass-and-train-are-available" class="section level1">
+<h1>MASS and train are available</h1>
+</div>
+<div id="linear-discriminant-analysis" class="section level1">
+<h1>linear discriminant analysis</h1>
+<p>lda.fit &lt;- lda(crime ~ ., data = train)</p>
+</div>
+<div id="print-the-lda.fit-object" class="section level1">
+<h1>print the lda.fit object</h1>
+<p>lda.fit</p>
+</div>
+<div id="the-function-for-lda-biplot-arrows" class="section level1">
+<h1>the function for lda biplot arrows</h1>
+<p>lda.arrows &lt;- function(x, myscale = 1, arrow_heads = 0.1, color = “orange”, tex = 0.75, choices = c(1,2)){ heads &lt;- coef(x) arrows(x0 = 0, y0 = 0, x1 = myscale * heads[,choices[1]], y1 = myscale * heads[,choices[2]], col=color, length = arrow_heads) text(myscale * heads[,choices], labels = row.names(heads), cex = tex, col=color, pos=3) }</p>
+</div>
+<div id="target-classes-as-numeric" class="section level1">
+<h1>target classes as numeric</h1>
+<p>classes &lt;- as.numeric(train$crime)</p>
+</div>
+<div id="plot-the-lda-results" class="section level1">
+<h1>plot the lda results</h1>
+<p>plot(lda.fit, dimen = 2, col = classes, pch = classes) lda.arrows(lda.fit, myscale = 1)</p>
+<div id="section-1" class="section level23">
+<p></p>
+</div>
+</div>
+<div id="predictin-classes-with-the-test-data" class="section level1">
+<h1>Predictin classes with the test data</h1>
+</div>
+<div id="predict-classes-with-test-data" class="section level1">
+<h1>predict classes with test data</h1>
+<p>lda.pred &lt;- predict(lda.fit, newdata = test)</p>
+</div>
+<div id="cross-tabulate-the-results" class="section level1">
+<h1>cross tabulate the results</h1>
+<p>table(correct = correct_classes, predicted = lda.pred$class)</p>
+<pre><code> predicted</code></pre>
+<p>correct low med_low med_high high low 13 12 0 0 med_low 1 14 3 0 med_high 1 10 14 3 high 0 0 1 30 The teable shows, that the test predicts well the results.</p>
+</div>
+<div id="euclidean-distance-matrix" class="section level1">
+<h1>euclidean distance matrix</h1>
+<p>dist_eu &lt;- dist(Boston)</p>
+</div>
+<div id="look-at-the-summary-of-the-distances" class="section level1">
+<h1>look at the summary of the distances</h1>
+<p>summary(dist_eu)</p>
+</div>
+<div id="manhattan-distance-matrix" class="section level1">
+<h1>manhattan distance matrix</h1>
+<p>dist_man &lt;- dist(Boston, method = ‘manhattan’)</p>
+</div>
+<div id="look-at-the-summary-of-the-distances-1" class="section level1">
+<h1>look at the summary of the distances</h1>
+<p>summary(dist_man)</p>
+<div id="section-2" class="section level16">
+<p></p>
+</div>
+</div>
+<div id="kmeans-on-boston-dataset" class="section level1">
+<h1>Kmeans on Boston dataset</h1>
+</div>
+<div id="k-means-clustering" class="section level1">
+<h1>k-means clustering</h1>
+<p>km &lt;-kmeans(Boston, centers = 3)</p>
+</div>
+<div id="plot-the-boston-dataset-with-clusters" class="section level1">
+<h1>plot the Boston dataset with clusters</h1>
+<p>pairs(Boston, col = km$cluster)</p>
+</div>
+<div id="boston-dataset-is-available" class="section level1">
+<h1>Boston dataset is available</h1>
+<p>set.seed(123)</p>
+</div>
+<div id="determine-the-number-of-clusters" class="section level1">
+<h1>determine the number of clusters</h1>
+<p>k_max &lt;- 10</p>
+</div>
+<div id="calculate-the-total-within-sum-of-squares" class="section level1">
+<h1>calculate the total within sum of squares</h1>
+<p>twcss &lt;- sapply(1:k_max, function(k){kmeans(Boston, k)$tot.withinss})</p>
+</div>
+<div id="visualize-the-results" class="section level1">
+<h1>visualize the results</h1>
+<p>qplot(x = 1:k_max, y = twcss, geom = ‘line’)</p>
+</div>
+<div id="k-means-clustering-1" class="section level1">
+<h1>k-means clustering</h1>
+<p>km &lt;-kmeans(Boston, centers = 2)</p>
+</div>
+<div id="plot-the-boston-dataset-with-clusters-1" class="section level1">
+<h1>plot the Boston dataset with clusters</h1>
+<p>pairs(Boston, col = km$cluster)</p>
+<div id="section-3" class="section level13">
+<p></p>
+</div>
+</div>
+<div id="extra" class="section level1">
+<h1>Extra</h1>
+<p>model_predictors &lt;- dplyr::select(train, -crime) # check the dimensions dim(model_predictors) dim(lda.fit<span class="math inline">\(scaling) # matrix multiplication matrix_product &lt;- as.matrix(model_predictors) %*% lda.fit\)</span>scaling matrix_product &lt;- as.data.frame(matrix_product)</p>
+<p>install.packages(“plotly”) install.packages(“qqplot”) library(qqplot2) library(“plotly”) plot_ly(x = matrix_product<span class="math inline">\(LD1, y = matrix_product\)</span>LD2, z = matrix_product$LD3, type= ‘scatter3d’, mode=‘markers’)</p>
 </div>
 
 

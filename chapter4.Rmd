@@ -1,0 +1,185 @@
+   Chapter 4 Clustering and classification
+
+install.packages("MASS")
+library(MASS)
+library(qqplot)
+
+The Boston dataset contains information about the housing in Boston Mass. The dataset contains 506 observations(rows) of 14 variables(columns). The recorded variables contain the following: 
+  crim per capita crime rate by town. 
+  zn proportion of residential land zoned for lots over 25,000 sq.ft. 
+  indus proportion of non-retail business acres per town. 
+  chas Charles River dummy variable (= 1 if tract bounds river; 0 otherwise). 
+  nox nitrogen oxides concentration (parts per 10 million). 
+  rm average number of rooms per dwelling. 
+  age proportion of owner-occupied units built prior to 1940. 
+  dis weighted mean of distances to five Boston employment centres. 
+  rad index of accessibility to radial highways. 
+  tax full-value property-tax rate per \$10,000. 
+  ptratio pupil-teacher ratio by town. 
+  black 1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town. 
+  lstat lower status of the population (percent). 
+  medv median value of owner-occupied homes in \$1000s.
+
+
+
+str(Boston)
+dim(Boston)
+pairs(Boston)
+summary(Boston)
+
+
+
+    center and standardize variables
+boston_scaled <- scale(Boston)
+
+    summaries of the scaled variables
+summary(boston_scaled)
+The mean of each variable is now 0. 
+
+    class of the boston_scaled object
+class(boston_scaled)
+
+
+    change the object to data frame
+boston_scaled <- as.data.frame(boston_scaled)
+
+    summary of the scaled crime rate
+summary(boston_scaled$crim)
+
+    create a quantile vector of crim and print it
+bins <- quantile(boston_scaled$crim)
+bins
+
+    create a categorical variable 'crime'
+crime <- cut(boston_scaled$crim, breaks = bins, include.lowest = TRUE, labels = c("low", "med_low", "med_high", "high"))
+
+    look at the table of the new factor crime
+table(crime)
+
+    remove original crim from the dataset
+boston_scaled <- dplyr::select(boston_scaled, -crim)
+
+    add the new categorical value to scaled data
+boston_scaled <- data.frame(boston_scaled, crime)
+   Creating a test and train datasets
+
+    number of rows in the Boston dataset 
+n <- nrow(boston_scaled)
+
+    choose randomly 80% of the rows
+ind <- sample(n,  size = n * 0.8)
+
+    create train set
+train <- boston_scaled[ind,]
+
+    create test set 
+test <- boston_scaled[-ind,]
+
+    save the correct classes from test data
+correct_classes <- test$crime
+
+    remove the crime variable from test data
+test <- dplyr::select(test, -crime)
+test$crime
+
+    MASS and train are available
+
+    linear discriminant analysis
+lda.fit <- lda(crime ~ ., data = train)
+
+    print the lda.fit object
+lda.fit
+
+    the function for lda biplot arrows
+lda.arrows <- function(x, myscale = 1, arrow_heads = 0.1, color = "orange", tex = 0.75, choices = c(1,2)){
+  heads <- coef(x)
+  arrows(x0 = 0, y0 = 0, 
+         x1 = myscale * heads[,choices[1]], 
+         y1 = myscale * heads[,choices[2]], col=color, length = arrow_heads)
+  text(myscale * heads[,choices], labels = row.names(heads), 
+       cex = tex, col=color, pos=3)
+}
+
+    target classes as numeric
+classes <- as.numeric(train$crime)
+
+    plot the lda results
+plot(lda.fit, dimen = 2, col = classes, pch = classes)
+lda.arrows(lda.fit, myscale = 1)
+
+
+   Predictin classes with the test data
+
+
+    predict classes with test data
+lda.pred <- predict(lda.fit, newdata = test)
+
+    cross tabulate the results
+table(correct = correct_classes, predicted = lda.pred$class)
+
+     predicted
+correct    low med_low med_high high
+  low       13      12        0    0
+  med_low    1      14        3    0
+  med_high   1      10       14    3
+  high       0       0        1   30
+The teable shows, that the test predicts well the results. 
+
+
+
+    euclidean distance matrix
+dist_eu <- dist(Boston)
+
+    look at the summary of the distances
+summary(dist_eu)
+
+    manhattan distance matrix
+dist_man <- dist(Boston, method = 'manhattan')
+
+    look at the summary of the distances
+summary(dist_man)
+
+    
+   Kmeans on Boston dataset
+
+    k-means clustering
+km <-kmeans(Boston, centers = 3)
+
+    plot the Boston dataset with clusters
+pairs(Boston, col = km$cluster)
+
+    Boston dataset is available
+set.seed(123)
+
+    determine the number of clusters
+k_max <- 10
+
+    calculate the total within sum of squares
+twcss <- sapply(1:k_max, function(k){kmeans(Boston, k)$tot.withinss})
+
+    visualize the results
+qplot(x = 1:k_max, y = twcss, geom = 'line')
+
+    k-means clustering
+km <-kmeans(Boston, centers = 2)
+
+    plot the Boston dataset with clusters
+pairs(Boston, col = km$cluster)
+
+
+#Extra
+
+model_predictors <- dplyr::select(train, -crime)
+    check the dimensions
+dim(model_predictors)
+dim(lda.fit$scaling)
+    matrix multiplication
+matrix_product <- as.matrix(model_predictors) %*% lda.fit$scaling
+matrix_product <- as.data.frame(matrix_product)
+
+install.packages("plotly")
+install.packages("qqplot")
+library(qqplot2)
+library("plotly")
+plot_ly(x = matrix_product$LD1, y = matrix_product$LD2, z = matrix_product$LD3, type= 'scatter3d', mode='markers')
+
