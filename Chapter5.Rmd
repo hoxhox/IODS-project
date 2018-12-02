@@ -9,22 +9,126 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+human<-read.csv("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human1.txt")
+human$GNI<-as.numeric(human$GNI)
+str(human$GNI)
+keep.col<- c("Country", "Edu2.FM", "Labo.FM", "Edu.Exp", "Life.Exp", "GNI", "Mat.Mor", "Ado.Birth", "Parli.F" )
+human <- select(human, one_of(keep.col))
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# filter out all rows with NA values
+data.frame(human[-1], comp = complete.cases(human))
+human_ <- filter(human, complete.cases(human))
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+tail<-tail(human_, 7)
+last <- nrow(human_) - 7
+human_<-human_[1:last, ]
 
-```{r cars}
-summary(cars)
+row.names(human_)<-human_$Country
+row.names(human_)
+human<-human_
+
+#Removinc column "country"
+human<- human(!(human$Country))
+human<-human[,(-1)]
+
+
+read.table(human, "C:\Users\Anna-Mari\Desktop\IODS-project1")
+
 ```
-
-## Including Plots
-
-You can also embed plots, for example:
+gather(human) %>% ggplot(aes(value))  + facet_wrap("key", scales = "free") + geom_histogram() 
+```
 
 ```{r pressure, echo=FALSE}
-plot(pressure)
+gather(human) %>% ggplot(aes(value))  + facet_wrap("key", scales = "free") + geom_histogram() 
+
+```
+The expected years of education (Edu.exp) and the female to male education ratio are almost normalli distributed. Other variables variables aren't normally distibuted, all of them are the variables are skewed.
+
+
+```{r pressure, echo=FALSE}
+corhuman<-cor(human[-1])
+corhuman <-round(corhuman, digits=2)
+corhuman
+corrplot(corhuman, method = "color") 
+
+```
+Maternal mortality is higly correlated to many of the variables concerning quality of life and life expectancy. It is negatively correlated to adolescent birth ratio (ado.birth) and female to male labour ratio (Labo.FM).
+
+
+Next we plot maternal mortality and life expectancy scatterplot to demonstrate the correlation. The lower the mortality, the higher the life expecentacy, as expected.
+
+```{r pressure, echo=FALSE}
+
+p11 <- ggplot(human, aes(x = Mat.Mor, y = Life.Exp))
+p11 + geom_point() + ggtitle("Relationship between Maternal mortality and life expectancy") + geom_smooth(method = "lm")
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+#PCA Analysis
+#Without scaling
+
+```{r pressure, echo=FALSE}
+
+human_pca <- prcomp(human[-1])
+summary(human_pca)
+
+
+```
+
+PC1 holds 92% of the variance, and PC2 onlyt 5%.
+
+```{r pressure, echo=FALSE}
+
+biplot(human_pca,  col = c("blue", "deeppink2"), xlim=c(-0.5, 0.5), ylim=c(-0.4, 0.2))
+
+
+```
+options(warn = -1)
+
+
+```{r pressure, echo=FALSE}
+
+
+```
+```{r pressure, echo=FALSE}
+
+human_std <- scale(human)
+human_pca_std <- prcomp(human_std) # Do PCA for the standardized data
+s <- summary(human_pca_std)
+
+summary(human_pca_std)
+
+
+```
+After scaling the variance of the principal components changes so, that PC 1 holds 48% of varianve and PC2 12%.
+
+
+
+#MCA analysis
+install.packages("FactoMineR")
+library("FactoMineR") 
+data("tea")
+
+```{r pressure, echo=FALSE}
+str(tea)
+summary(tea)
+
+```
+
+
+#Selecting columns
+keep_columns <- c("Tea", "How", "how", "sugar", "where", "spirituality", "healthy") 
+tea_time <- dplyr::select(tea, one_of(keep_columns))
+mca_tea_time <- MCA(tea_time, graph = FALSE)
+
+```{r pressure, echo=FALSE}
+summary(mca_tea_time)
+
+```
+
+
+```{r pressure, echo=FALSE}
+plot(mca_tea_time, invisible=c("ind"), habillage = "quali")
+
+```
