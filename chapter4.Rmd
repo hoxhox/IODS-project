@@ -1,6 +1,6 @@
    Chapter 4 Clustering and classification
 
-install.packages("MASS")
+#install.packages("MASS")
 library(MASS)
 library(qqplot)
 
@@ -123,15 +123,14 @@ correct    low med_low med_high high
   med_low    1      14        3    0
   med_high   1      10       14    3
   high       0       0        1   30
-The teable shows, that the test predicts well the results. 
+ Thus a good ability to predict the alcohol consumption.
 
 
 
     euclidean distance matrix
 dist_eu <- dist(Boston)
 
-    look at the summary of the distances
-summary(dist_eu)
+ 
 
     manhattan distance matrix
 dist_man <- dist(Boston, method = 'manhattan')
@@ -170,6 +169,9 @@ pairs(Boston, col = km$cluster)
 #Extra
 
 model_predictors <- dplyr::select(train, -crime)
+
+
+
     check the dimensions
 dim(model_predictors)
 dim(lda.fit$scaling)

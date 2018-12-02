@@ -9,34 +9,9 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-human<-read.csv("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human1.txt")
-human$GNI<-as.numeric(human$GNI)
-str(human$GNI)
-keep.col<- c("Country", "Edu2.FM", "Labo.FM", "Edu.Exp", "Life.Exp", "GNI", "Mat.Mor", "Ado.Birth", "Parli.F" )
-human <- select(human, one_of(keep.col))
-
-# filter out all rows with NA values
-data.frame(human[-1], comp = complete.cases(human))
-human_ <- filter(human, complete.cases(human))
-
-tail<-tail(human_, 7)
-last <- nrow(human_) - 7
-human_<-human_[1:last, ]
-
-row.names(human_)<-human_$Country
-row.names(human_)
-human<-human_
-
-#Removinc column "country"
-human<- human(!(human$Country))
-human<-human[,(-1)]
 
 
-read.table(human, "C:\Users\Anna-Mari\Desktop\IODS-project1")
-
-```
-gather(human) %>% ggplot(aes(value))  + facet_wrap("key", scales = "free") + geom_histogram() 
-```
+The human development index data describes 155 countries in 8 different variables. The variables contain maternal mortality, female to male ratio of labor and education, GNI, expected years of education and life expectancy and adolescent birth ratio.
 
 ```{r pressure, echo=FALSE}
 gather(human) %>% ggplot(aes(value))  + facet_wrap("key", scales = "free") + geom_histogram() 
@@ -57,8 +32,8 @@ Maternal mortality is higly correlated to many of the variables concerning quali
 
 Next we plot maternal mortality and life expectancy scatterplot to demonstrate the correlation. The lower the mortality, the higher the life expecentacy, as expected.
 
-```{r pressure, echo=FALSE}
-
+```
+{r pressure, echo=FALSE}
 p11 <- ggplot(human, aes(x = Mat.Mor, y = Life.Exp))
 p11 + geom_point() + ggtitle("Relationship between Maternal mortality and life expectancy") + geom_smooth(method = "lm")
 
@@ -106,7 +81,7 @@ After scaling the variance of the principal components changes so, that PC 1 hol
 
 
 #MCA analysis
-install.packages("FactoMineR")
+#install.packages("FactoMineR")
 library("FactoMineR") 
 data("tea")
 
