@@ -92,7 +92,6 @@ summary(tea)
 ```
 
 
-#Selecting columns
 keep_columns <- c("Tea", "How", "how", "sugar", "where", "spirituality", "healthy") 
 tea_time <- dplyr::select(tea, one_of(keep_columns))
 mca_tea_time <- MCA(tea_time, graph = FALSE)
