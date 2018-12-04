@@ -82,8 +82,6 @@ correct_classes <- test$crime
 test <- dplyr::select(test, -crime)
 test$crime
 
-    MASS and train are available
-
     linear discriminant analysis
 lda.fit <- lda(crime ~ ., data = train)
 
